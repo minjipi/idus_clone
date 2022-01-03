@@ -1,0 +1,38 @@
+<th:block th:replace="~{/layout/basic :: setContent(~{this::content})}">
+    <th:block th:fragment="content">
+
+    </th:block>
+</th:block>
+
+
+<div class="inner-w mobile-full">
+    <!-- vip club banner -->
+
+    <div data-trigger-detail="true"></div>
+    <div data-trigger="fixposition"></div>
+    <nav class="flex_nav_style nav-mobile--nm" data-ui-position="default" data-ui="tab-control"
+         data-page="product">
+        <a href="#prd-info" data-id="prd-info" class="active">작품정보</a>
+    </nav>
+
+    <!-- 제품정보 -->
+    <section id="prd-info" class="prd-detail-section" data-scroll="hashChecker">
+        <!-- 안전식품 고지 -->
+
+        <p style="word-break: break-all" class="para">
+            <textarea name="productInfo"></textarea>
+        </p>
+
+        <div class="hashtag-box">
+            <div class="center-txt">
+                <span class="txt">Category &amp; Keyword</span>
+                <a class="txt-strong" href="/w/main/category/66299878-c6bc-11e3-8577-06f4fe0000b5">
+                    인테리어 소품 </a>
+            </div>
+            <div class="listwrap">
+                <textarea name="tags"></textarea>
+            </div>
+        </div>
+
+    </section>
+</div>

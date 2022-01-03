@@ -1,0 +1,35 @@
+plugins {
+    id 'org.springframework.boot' version '2.6.1'
+    id 'io.spring.dependency-management' version '1.0.11.RELEASE'
+    id 'java'
+}
+
+group = 'com.idus'
+version = '0.0.1-SNAPSHOT'
+sourceCompatibility = '11'
+
+repositories {
+    mavenCentral()
+}
+
+dependencies {
+    implementation 'org.springframework.boot:spring-boot-starter-web'
+    implementation 'org.springframework.boot:spring-boot-starter-thymeleaf'
+    implementation 'org.springframework.boot:spring-boot-starter-data-jpa'
+    developmentOnly 'org.springframework.boot:spring-boot-devtools'
+    testImplementation 'org.springframework.boot:spring-boot-starter-test'
+    implementation 'org.springframework.boot:spring-boot-starter-validation'
+    compileOnly  'org.projectlombok:lombok'
+    annotationProcessor 'org.projectlombok:lombok'
+    runtimeOnly 'mysql:mysql-connector-java'
+    implementation 'io.jsonwebtoken:jjwt:0.9.1'
+    implementation 'org.glassfish.jaxb:jaxb-runtime:3.0.2'
+    implementation group: 'net.coobird', name: 'thumbnailator', version: '0.4.12'
+    //implementation 'org.springframework.boot:spring-boot-starter-security'
+    //implementation 'org.thymeleaf.extras:thymeleaf-extras-springsecurity5'
+
+}
+
+test {
+    useJUnitPlatform()
+}
