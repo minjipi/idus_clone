@@ -1,7 +1,6 @@
-package com.idus.web.product.product;
+package com.idus.web.product.product.dto;
 
 
-import com.idus.web.product.option.Option;
 import com.idus.web.product.option.OptionDTO;
 import lombok.*;
 
@@ -22,6 +21,9 @@ public class ProductDTO {
     private int quantity;
     private String productInfo;
     private String tags;
+
+    @Builder.Default
+    private List<ProductImageUploadDTO> productImageUploadDTOList = new ArrayList<>();
 
     @Builder.Default
     private List<OptionDTO> optionDTOList = new ArrayList<>();

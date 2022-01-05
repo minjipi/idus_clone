@@ -32682,10 +32682,11 @@
                             <div class="outer-frame">
                                 <ul class="img-view inner-frame">
                                     <li class="ui-slide" data-trigger-preview="open"
-                                        style="background-image: url(&quot;https://image.idus.com/image/files/aa8767e20aad421f92b84d94eefd0764_720.jpg&quot;); width: 560px;"
+                                        th:style="|background-image: url(/product/display?fileName=${dto.productImageUploadDTOList[0].getImageURL()}); width: 560px|"
                                         data-index="0">
                                     </li>
                                 </ul>
+
                             </div>
                             <fieldset class="ui-control">
                                 <button type="button" class="ui-btn prev" aria-label="이전"><i
@@ -32732,7 +32733,8 @@
                                                  class="product-detail-star-text-box">
                                                 <div data-v-6a60e66d="" data-v-488f5f82=""
                                                      class="product-detail-star-box">
-                                                    <i data-v-6a60e66d="" data-v-488f5f82="" class="product-detail-star idus-icon-favorite-border-p-5"></i>
+                                                    <i data-v-6a60e66d="" data-v-488f5f82=""
+                                                       class="product-detail-star idus-icon-favorite-border-p-5"></i>
                                                 </div>
                                                 <div data-v-6a60e66d="" data-v-488f5f82=""
                                                      class="star-count-text-box">
@@ -33049,7 +33051,9 @@
                                                                             <span data-v-de09a10e="">[[${ optionSelect.price }]]</span>
                                                                         </li>
 
-                                                                        <input type="hidden" th:id="${ optionSelect.title }" th:value="${ optionSelect.price }">
+                                                                        <input type="hidden"
+                                                                               th:id="${ optionSelect.title }"
+                                                                               th:value="${ optionSelect.price }">
 
                                                                     </th:block>
                                                                 </th:block>
@@ -33124,7 +33128,7 @@
                                                             event.currentTarget.parentNode.parentNode.nextElementSibling.getElementsByTagName('ul')[0].setAttribute('class', 'select_group__child_list active');
 
                                                             // optionSelect 선택 1.
-                                                            optionSelectPrice  = optionSelectPrice + parseInt(optionItemPrice);
+                                                            optionSelectPrice = optionSelectPrice + parseInt(optionItemPrice);
 
                                                         } else {
                                                             event.currentTarget.parentNode.parentNode.parentNode.parentNode.setAttribute('style', 'display: none;');
@@ -33132,24 +33136,24 @@
                                                             var selected_options_value = '';
 
                                                             // optionSelect 선택 2.
-                                                            optionSelectPrice =  parseInt(optionSelectPrice) + parseInt(optionItemPrice);
+                                                            optionSelectPrice = parseInt(optionSelectPrice) + parseInt(optionItemPrice);
 
 
                                                             // optionSelect 선택 끝.
 
 
                                                             // 옵션 선택한 것들 (이름) 목록
-                                                            for (var i = 0; i<document.getElementsByClassName('select_group__parent_list').length; i++){
+                                                            for (var i = 0; i < document.getElementsByClassName('select_group__parent_list').length; i++) {
 
                                                                 // 선택한 옵션 이름.
                                                                 optionSelectNameAndPrice = optionSelectNameAndPrice + (document.getElementsByClassName('align_right')[i].innerText) + ":";
 
                                                                 // 선택한 옵션 가격.
-                                                                var SelectItemPrice =  document.querySelectorAll('#'+ document.getElementsByClassName('align_right')[i].innerText)[0].value;
+                                                                var SelectItemPrice = document.querySelectorAll('#' + document.getElementsByClassName('align_right')[i].innerText)[0].value;
 
                                                                 optionSelectItemPrice = optionSelectItemPrice + parseInt(SelectItemPrice);
 
-                                                                optionSelectNameAndPrice = optionSelectNameAndPrice + document.querySelectorAll('#'+ document.getElementsByClassName('align_right')[i].innerText)[0].value + ", ";
+                                                                optionSelectNameAndPrice = optionSelectNameAndPrice + document.querySelectorAll('#' + document.getElementsByClassName('align_right')[i].innerText)[0].value + ", ";
                                                             }
 
                                                             var tatalPrice = itemprice + optionSelectItemPrice;
@@ -33158,8 +33162,8 @@
 
                                                             var same = false;
                                                             var i = 0;
-                                                            for(i=0; i< option_cards.length; i++) {
-                                                                if(optionSelectNameAndPrice.slice(0,-2) + selected_options_value.slice(0, -3) == option_cards[i].firstElementChild.innerHTML) {
+                                                            for (i = 0; i < option_cards.length; i++) {
+                                                                if (optionSelectNameAndPrice.slice(0, -2) + selected_options_value.slice(0, -3) == option_cards[i].firstElementChild.innerHTML) {
 
                                                                     same = true;
 
@@ -33167,14 +33171,14 @@
                                                                 }
                                                             }
 
-                                                            if(same) {
+                                                            if (same) {
                                                                 var target_input = option_cards[i].lastElementChild.firstElementChild.firstElementChild.nextElementSibling;
-                                                                target_input.value = parseInt(target_input.value)+1;
+                                                                target_input.value = parseInt(target_input.value) + 1;
                                                                 target_input.setAttribute('value', target_input.value);
                                                                 console.log(i);
                                                                 var option_price = option_cards[i].firstElementChild.innerText;
                                                                 var total_price = parseInt(document.getElementsByClassName('sold-price')[0].innerText);
-                                                                for(var j=0; j<option_price.split(',').length; j++ ) {
+                                                                for (var j = 0; j < option_price.split(',').length; j++) {
                                                                     total_price += parseInt(option_price.split(',')[j].split(':')[1])
                                                                 }
                                                                 var price = option_cards[i].lastElementChild.lastElementChild.firstElementChild.getElementsByTagName('b')[0];
@@ -33183,7 +33187,7 @@
                                                             } else {
                                                                 selected_options.innerHTML = selected_options.innerHTML + `
                                                                 <div data-v-d3539526="" data-v-de09a10e="" class="option_card">
-                                                                <p data-v-d3539526="">` + optionSelectNameAndPrice.slice(0,-2) + selected_options_value.slice(0, -3) + `</p>
+                                                                <p data-v-d3539526="">` + optionSelectNameAndPrice.slice(0, -2) + selected_options_value.slice(0, -3) + `</p>
                                                                 <div data-v-d3539526="" class="option_card__aligner">
                                                                 <div data-v-d3539526="" class="option_card__counter">
                                                                 <button data-v-d3539526="" type="button" aria-label="수량 빼기" class="ui_btn--mini disabled" onclick="minus(this)">-
@@ -33194,7 +33198,7 @@
                                                                 </div>
                                                                 <div data-v-d3539526="">
                                                                 <span data-v-d3539526="">
-                                                                <b data-v-d3539526="" class="itempriceFunc">`+ tatalPrice +`</b>원
+                                                                <b data-v-d3539526="" class="itempriceFunc">` + tatalPrice + `</b>원
                                                                 </span>
                                                                 <button data-v-d3539526="" type="button" class="ui_btn--mini option_card__close">
                                                                 <i data-v-d3539526="" class="idus-icon-close"></i>
@@ -33207,7 +33211,7 @@
                                                             optionSelectPrice = 0;
                                                             optionSelectName = "";
                                                             optionSelectNameAndPrice = "";
-                                                            optionSelectItemPrice =0;
+                                                            optionSelectItemPrice = 0;
 
                                                             for (var i = 0; i < document.getElementsByClassName('align_right').length; i++) {
                                                                 document.getElementsByClassName('align_right')[i].innerText = '';
@@ -33219,35 +33223,35 @@
                                                         var lastPrice = document.querySelectorAll('.itempriceFunc');
 
                                                         var total = 0;
-                                                        for(var i=0; i< lastPrice.length; i++) {
+                                                        for (var i = 0; i < lastPrice.length; i++) {
                                                             total = total + parseInt(lastPrice[i].innerText);
                                                             console.log("가격 : " + lastPrice[i].innerText);
                                                         }
 
-                                                        document.getElementsByClassName('lastTotalPrice')[0].innerText=total;
+                                                        document.getElementsByClassName('lastTotalPrice')[0].innerText = total;
                                                     }
 
-                                                    function plus(target){
+                                                    function plus(target) {
                                                         var targetNum = parseInt(target.previousElementSibling.value);
                                                         target.previousElementSibling.value = targetNum + 1;
                                                         target.previousElementSibling.setAttribute('value', target.previousElementSibling.value);
-                                                        if (targetNum > 0){
-                                                            target.previousElementSibling.previousElementSibling.setAttribute('class','ui_btn--mini');
+                                                        if (targetNum > 0) {
+                                                            target.previousElementSibling.previousElementSibling.setAttribute('class', 'ui_btn--mini');
                                                         }
                                                         compareThree();
                                                         optionCal(target.previousElementSibling.value, total_price, price);
                                                     }
 
-                                                    function minus(target){
-                                                        var targetNum =  parseInt(target.nextElementSibling.value);
+                                                    function minus(target) {
+                                                        var targetNum = parseInt(target.nextElementSibling.value);
                                                         target.nextElementSibling.setAttribute('value', target.nextElementSibling.value);
-                                                        if(targetNum > 1){
+                                                        if (targetNum > 1) {
                                                             target.nextElementSibling.value = targetNum - 1;
-                                                        }else if (targetNum <= 1) {
+                                                        } else if (targetNum <= 1) {
                                                             return;
                                                         }
 
-                                                        if (targetNum == 2){
+                                                        if (targetNum == 2) {
                                                             target.setAttribute('class', 'ui_btn--mini disabled');
                                                         }
                                                         compareThree();
@@ -33258,10 +33262,10 @@
                                                         compareThree();
                                                         var num = parseInt(target.value);
 
-                                                        if (num > 1){
-                                                            target.previousElementSibling.setAttribute('class','ui_btn--mini');
+                                                        if (num > 1) {
+                                                            target.previousElementSibling.setAttribute('class', 'ui_btn--mini');
                                                         }
-                                                        if (num == 1){
+                                                        if (num == 1) {
                                                             target.previousElementSibling.setAttribute('class', 'ui_btn--mini disabled');
                                                         }
                                                         target.setAttribute('value', num);
@@ -33269,22 +33273,22 @@
                                                     }
 
                                                     function optionCal(num, total_price, price) {
-                                                        price.innerText = num*total_price;
-                                                        var total=0;
+                                                        price.innerText = num * total_price;
+                                                        var total = 0;
 
-                                                        for (var i=0; i<document.getElementsByClassName("itempriceFunc").length; i++){
+                                                        for (var i = 0; i < document.getElementsByClassName("itempriceFunc").length; i++) {
 
                                                             total = total + parseInt(document.getElementsByClassName("itempriceFunc")[i].innerHTML);
                                                             console.log("total: " + total);
 
                                                         }
-                                                        document.getElementsByClassName("lastTotalPrice")[0].innerHTML= total;
+                                                        document.getElementsByClassName("lastTotalPrice")[0].innerHTML = total;
                                                     }
 
-                                                    function compareThree(){
+                                                    function compareThree() {
                                                         var option_price = target.parentNode.parentNode.previousElementSibling.innerText;
                                                         var total_price = parseInt(document.getElementsByClassName('sold-price')[0].innerText);
-                                                        for(var i=0; i<option_price.split(',').length; i++ ) {
+                                                        for (var i = 0; i < option_price.split(',').length; i++) {
                                                             total_price += parseInt(option_price.split(',')[i].split(':')[1])
                                                         }
                                                         var price = target.parentNode.nextElementSibling.getElementsByTagName('b')[0];
@@ -33294,7 +33298,8 @@
 
 
                                             </div>
-                                            <button data-v-de09a10e="" type="button" class="ui_btn--large select_group__close">
+                                            <button data-v-de09a10e="" type="button"
+                                                    class="ui_btn--large select_group__close">
                                                 옵션 선택 닫기
                                             </button>
                                         </div>
@@ -33314,7 +33319,7 @@
                                         </dl>
                                     </div>
 
-<!--                                    최종 가격 -->
+                                    <!--                                    최종 가격 -->
                                     <script>
                                         var lastTotalPrice = document.getElementsByClassName('lastTotalPrice')[0];
                                         console.log(document.getElementsByClassName('itempriceFunc'));
@@ -33327,8 +33332,10 @@
                                         <button data-v-de09a10e="" type="submit" data-to="cart" class="ui_btn cart">
                                             장바구니
                                         </button>
-                                        <button data-v-de09a10e="" type="submit" data-to="payment" data-pay-type="npay" class="ui_btn npay">
-                                            <img data-v-de09a10e="" src="/resources/dist/images/npay.svg" alt="N Pay"></button>
+                                        <button data-v-de09a10e="" type="submit" data-to="payment" data-pay-type="npay"
+                                                class="ui_btn npay">
+                                            <img data-v-de09a10e="" src="/resources/dist/images/npay.svg" alt="N Pay">
+                                        </button>
                                         <button data-v-de09a10e="" type="submit" data-to="payment"
                                                 data-pay-type="npay" class="ui_btn npay_sub">
                                             <img data-v-de09a10e="" src="/resources/dist/images/npay.svg" alt="N Pay">

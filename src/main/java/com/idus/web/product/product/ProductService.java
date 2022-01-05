@@ -6,6 +6,8 @@ import com.idus.web.product.option.OptionRepository;
 import com.idus.web.product.optionSelect.OptionSelect;
 import com.idus.web.product.optionSelect.OptionSelectDTO;
 import com.idus.web.product.optionSelect.OptionSelectRepository;
+import com.idus.web.product.product.dto.ProductDTO;
+import com.idus.web.product.product.dto.ProductImageUploadDTO;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.stereotype.Service;
 
@@ -19,6 +21,9 @@ public class ProductService {
     OptionRepository optionRepository;
     @Autowired
     OptionSelectRepository optionSelectRepository;
+
+    @Autowired
+    ProductImageUploadRepository productImageUploadRepository;
 
     public void saveService(ProductDTO productDTO) {
         Product product = Product.builder()
@@ -58,6 +63,22 @@ public class ProductService {
                 }
             }
         }
+
+        List<ProductImageUploadDTO> productImageUploadDTOList = productDTO.getProductImageUploadDTOList();
+        if (productImageUploadDTOList.size() > 0) {
+            for (int i = 0; i < productImageUploadDTOList.size(); i++) {
+
+                ProductImageUploadDTO productImageUploadDTO = productImageUploadDTOList.get(i);
+
+                ProductImageUpload productImageUpload = ProductImageUpload.builder().imgName(productImageUploadDTO.getImgName())
+                        .product(product)
+                        .build();
+
+                productImageUploadRepository.save(productImageUpload);
+            }
+        }
+
+
     }
 
     public ProductDTO readService(int idx) {
@@ -164,6 +185,15 @@ public class ProductService {
 
         Collections.sort(optionDTOList, new OptionDTOComparator());
 
+
+        Set<ProductImageUploadDTO> productImageUploadDTOSet = new HashSet<>();
+
+        result.forEach(arr -> {
+            ProductImageUpload productImageUpload = (ProductImageUpload) arr[3];
+            ProductImageUploadDTO productImageUploadDTO = ProductImageUploadDTO.builder().imgName(productImageUpload.getImgName()).build();
+            productImageUploadDTOSet.add(productImageUploadDTO);
+        });
+        List<ProductImageUploadDTO> productImageUploadDTOList = new ArrayList<>(productImageUploadDTOSet);
         ProductDTO productDTO = ProductDTO.builder()
                 .idx(product.getIdx())
                 .productName(product.getProductName())
@@ -173,8 +203,10 @@ public class ProductService {
                 .productInfo(product.getProductInfo())
                 .tags(product.tags)
                 .optionDTOList(optionDTOList)
+                .productImageUploadDTOList(productImageUploadDTOList)
                 .build();
 //      productDTO에 product 엔티티의 idx, 값을 저장한다.
+
 
 //      productDTO를 반환.
         return productDTO;
@@ -192,6 +224,46 @@ public class ProductService {
         public int compare(OptionSelectDTO optionSelectDTO1, OptionSelectDTO optionSelectDTO2) {
             return ((Integer) optionSelectDTO1.getIdx()).compareTo(optionSelectDTO2.getIdx());
         }
+    }
+
+    public List<ProductDTO> listService() {
+        List<Object[]> result = productRepository.getProductWithImage();
+
+        //      레포지터리의 getProductWithImage 메소드에 리스트 타입의 result 변수생성
+
+        //         []    0       1
+        //       + - - - - - - - - - - - - - - -
+        // get() |
+        //  0    | product1, ProductImageUpload1-1
+        //  1    | product1, ProductImageUpload1-2
+        //  2    | product2, ProductImageUpload2-1
+
+        List<ProductDTO> productDTOList = new ArrayList<>();
+
+        result.forEach(arr -> {
+            Product product = (Product) arr[0];
+            ProductDTO productDTO = ProductDTO.builder()
+                    .idx(product.getIdx())
+                    .productName(product.getProductName())
+                    .salePrice(product.getSalePrice())
+                    .price(product.getPrice())
+                    .build();
+
+            List<ProductImageUploadDTO> productImageUploadDTOList = new ArrayList<>();
+
+            ProductImageUpload productImageUpload = (ProductImageUpload) arr[1];
+            if(productImageUpload != null) {
+                ProductImageUploadDTO productImageUploadDTO = ProductImageUploadDTO.builder()
+                        .imgName(productImageUpload.getImgName())
+                        .build();
+                productImageUploadDTOList.add(productImageUploadDTO);
+                if(productDTO.getIdx()==productImageUpload.getProduct().idx){
+                    productDTO.setProductImageUploadDTOList(productImageUploadDTOList);
+                }
+            }
+            productDTOList.add(productDTO);
+        });
+    return productDTOList;
     }
 
 }

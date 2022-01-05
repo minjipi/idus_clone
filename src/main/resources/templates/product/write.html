@@ -527,7 +527,7 @@
         }
         </style>
 
-        <form action="/product/write" method="post">
+        <form action="/product/write" method="post" enctype="multipart/form-data">
             <div id="content" class="content relative" data-page="prd-detail">
                 <div id="sticky-start" style="position: absolute; top: 25px;"></div>
                 <div class="inner-w mobile-full">
@@ -546,9 +546,13 @@
                             <fieldset class="ui-control">
                                 <button type="button" class="ui-btn prev" aria-label="이전"><i
                                         class="fa fa-angle-left fa-2x"></i></button>
+
+                                    <input type="file" name="productimage"><br>
+                                    <input type="submit">
+
                                 <ul class="img-list indicator">
-                                    <li class="indicator-btn"
-                                        style="background-image: url(https://image.idus.com/image/files/aa8767e20aad421f92b84d94eefd0764_720.jpg)"></li>
+
+                                    <li class="indicator-btn" style="background-image: url(https://image.idus.com/image/files/aa8767e20aad421f92b84d94eefd0764_720.jpg)"></li>
                                 </ul>
                                 <button type="button" class="ui-btn next" aria-label="다음"><i
                                         class="fa fa-angle-right fa-2x"></i></button>
