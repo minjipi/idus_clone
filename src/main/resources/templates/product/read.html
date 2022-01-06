@@ -33200,12 +33200,11 @@
                                                                 <span data-v-d3539526="">
                                                                 <b data-v-d3539526="" class="itempriceFunc">` + tatalPrice + `</b>원
                                                                 </span>
-                                                                <button data-v-d3539526="" type="button" class="ui_btn--mini option_card__close">
+                                                                <button data-v-d3539526="" type="button" class="ui_btn--mini option_card__close" onclick="deleteOption(this)">
                                                                 <i data-v-d3539526="" class="idus-icon-close"></i>
                                                                 </button></div></div></div>
 
                                                                 `;
-
                                                             }
                                                             lastPrice();
                                                             optionSelectPrice = 0;
@@ -33216,6 +33215,17 @@
                                                             for (var i = 0; i < document.getElementsByClassName('align_right').length; i++) {
                                                                 document.getElementsByClassName('align_right')[i].innerText = '';
                                                             }
+                                                        }
+                                                    }
+
+                                                    // 옵션 삭제.
+                                                    function deleteOption(target) {
+                                                        if (document.getElementsByClassName('option_card').length == 1) {
+                                                            target.parentNode.parentNode.parentNode.remove();
+                                                            document.getElementsByClassName('lastTotalPrice')[0].innerText = 0;
+                                                        } else {
+                                                            target.parentNode.parentNode.parentNode.remove();
+                                                            document.getElementsByClassName('lastTotalPrice')[0].innerText = document.getElementsByClassName('itempriceFunc')[0].innerHTML;
                                                         }
                                                     }
 
@@ -33238,7 +33248,12 @@
                                                         if (targetNum > 0) {
                                                             target.previousElementSibling.previousElementSibling.setAttribute('class', 'ui_btn--mini');
                                                         }
-                                                        compareThree();
+                                                        var option_price = target.parentNode.parentNode.previousElementSibling.innerText;
+                                                        var total_price = parseInt(document.getElementsByClassName('sold-price')[0].innerText);
+                                                        for (var i = 0; i < option_price.split(',').length; i++) {
+                                                            total_price += parseInt(option_price.split(',')[i].split(':')[1])
+                                                        }
+                                                        var price = target.parentNode.nextElementSibling.getElementsByTagName('b')[0];
                                                         optionCal(target.previousElementSibling.value, total_price, price);
                                                     }
 
@@ -33254,12 +33269,22 @@
                                                         if (targetNum == 2) {
                                                             target.setAttribute('class', 'ui_btn--mini disabled');
                                                         }
-                                                        compareThree();
+                                                        var option_price = target.parentNode.parentNode.previousElementSibling.innerText;
+                                                        var total_price = parseInt(document.getElementsByClassName('sold-price')[0].innerText);
+                                                        for (var i = 0; i < option_price.split(',').length; i++) {
+                                                            total_price += parseInt(option_price.split(',')[i].split(':')[1])
+                                                        }
+                                                        var price = target.parentNode.nextElementSibling.getElementsByTagName('b')[0];
                                                         optionCal(target.nextElementSibling.value, total_price, price);
                                                     }
 
                                                     function inputChangeEvent(target) {
-                                                        compareThree();
+                                                        var option_price = target.parentNode.parentNode.previousElementSibling.innerText;
+                                                        var total_price = parseInt(document.getElementsByClassName('sold-price')[0].innerText);
+                                                        for (var i = 0; i < option_price.split(',').length; i++) {
+                                                            total_price += parseInt(option_price.split(',')[i].split(':')[1])
+                                                        }
+                                                        var price = target.parentNode.nextElementSibling.getElementsByTagName('b')[0];
                                                         var num = parseInt(target.value);
 
                                                         if (num > 1) {
@@ -33283,15 +33308,6 @@
 
                                                         }
                                                         document.getElementsByClassName("lastTotalPrice")[0].innerHTML = total;
-                                                    }
-
-                                                    function compareThree() {
-                                                        var option_price = target.parentNode.parentNode.previousElementSibling.innerText;
-                                                        var total_price = parseInt(document.getElementsByClassName('sold-price')[0].innerText);
-                                                        for (var i = 0; i < option_price.split(',').length; i++) {
-                                                            total_price += parseInt(option_price.split(',')[i].split(':')[1])
-                                                        }
-                                                        var price = target.parentNode.nextElementSibling.getElementsByTagName('b')[0];
                                                     }
 
                                                 </script>

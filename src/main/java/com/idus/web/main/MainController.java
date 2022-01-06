@@ -23,6 +23,7 @@ public class MainController {
 
         List<ProductDTO> productDTOList = productService.listService();
         model.addAttribute("productDTOList", productDTOList);
+        System.out.println("============== productDTOList: " + productDTOList);
 
         return "main.html";
     }

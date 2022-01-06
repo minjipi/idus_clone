@@ -1,4 +1,4 @@
-<th:block th:replace="~{/layout/basic :: setContent(~{this::content})}">
+<th:block th:replace="~{/layout/basic :: setContent(~{this::content})}" xmlns:th="http://www.w3.org/1999/XSL/Transform">
     <th:block th:fragment="content">
 
         <div id="content" class="content" data-page="main">
@@ -178,125 +178,147 @@
 
                                                     <div data-v-14bdd7c0="" class="ui_grid__cols--4">
 
+
                                                         <th:block th:if="${productDTOList}">
                                                             <th:block th:each="productDTO : ${productDTOList}">
-                                                        <div data-v-14bdd7c0="" class="ui_grid__item">
-                                                            <div data-v-796f1feb="" data-v-95de9256=""
-                                                                 data-v-14bdd7c0=""
-                                                                 class="base-card card--vertical product"><a
-                                                                    data-v-796f1feb=""
-                                                                    href="/w/product/2796f4e3-f605-4194-ab99-353fbf2e6706"
-                                                                    target="_blank" tabindex="0">
-                                                                <div data-v-796f1feb="" class="card-thumb-cover">
-                                                                    <img
-                                                                            data-v-95de9256="" data-v-796f1feb=""
-                                                                            src="https://image.idus.com/static/ticketdeal/badge_welcomedeal.png"
-                                                                            alt="웰컴딜 100원" width="51" height="51"
-                                                                            class="Card__thumbImageBadge">
-                                                                    <div data-v-95de9256="" data-v-796f1feb=""
-                                                                         id="thumb-2796f4e3-f605-4194-ab99-353fbf2e6706"
-                                                                         class="product-thumb-img"
-                                                                         style="background-image: url(&quot;https://image.idus.com/image/files/bc91f07cbd434255a2e28678fb1ba8cf_512.jpg&quot;);"></div>
-                                                                    <!---->
-                                                                    <div data-v-95de9256="" data-v-796f1feb=""
-                                                                         class="product-bookmark">
-                                                                        <button data-v-488f5f82=""
-                                                                                data-v-95de9256=""
-                                                                                aria-label="찜하기" class="full-button"
-                                                                                data-v-796f1feb=""
-                                                                                style="width: 24px; height: 24px;"
-                                                                                tabindex="0"><i data-v-95de9256=""
-                                                                                                data-v-488f5f82=""
-                                                                                                class="sp-icon icon-favorite"></i>
-                                                                        </button>
-                                                                    </div>
-                                                                </div>
-                                                                <div data-v-796f1feb=""
-                                                                     class="card-info product-info">
-                                                                    <div data-v-95de9256="" data-v-796f1feb=""
-                                                                         class="product-info__artist-name">
-                                                                        판매자
-                                                                    </div>
-                                                                    <div data-v-95de9256="" data-v-796f1feb=""
-                                                                         class="product-info__name">
-                                                                        [[${ productDTO.productName }]]
-                                                                    </div>
-                                                                    <div data-v-95de9256="" data-v-796f1feb=""
-                                                                         class="product-info__price"><span
-                                                                            data-v-95de9256="" data-v-796f1feb=""
-                                                                            class="sale-rate"> 99% </span> <span
-                                                                            data-v-95de9256="" data-v-796f1feb=""
-                                                                            class="price-sale">
-                100
-                <span data-v-95de9256="" data-v-796f1feb="" style="font-size: 14px;">원</span></span>
-                                                                        <div data-v-95de9256="" data-v-796f1feb=""
-                                                                             class="price-origin--before-sale">
-                                                                            <del data-v-95de9256=""
-                                                                                 data-v-796f1feb="">
-                                                                                7,500원
-                                                                            </del>
-                                                                        </div>
-                                                                    </div>
-                                                                    <div data-v-95de9256="" data-v-796f1feb=""
-                                                                         class="product-info__badge-group"
-                                                                         style="margin-top: 12px;">
-                                                                        <div data-v-2f2bc7d4="" data-v-95de9256=""
-                                                                             class="badge badge-food"
-                                                                             data-v-796f1feb="">
-                                                                            안전식품
-                                                                        </div>
-                                                                    </div>
-                                                                    <div data-v-95de9256="" data-v-796f1feb=""
-                                                                         class="product-info__review">
-                                                                        <div data-v-95de9256="" data-v-796f1feb=""
-                                                                             class="review-rating"><span
-                                                                                data-v-ef94db98=""
-                                                                                data-v-95de9256=""
-                                                                                data-value="4.8"
-                                                                                class="ui_rating fr"
-                                                                                data-v-796f1feb=""><i
-                                                                                data-v-ef94db98=""
-                                                                                data-state="active"
-                                                                                class="ui_icon--star idus-icon-star-fill"
-                                                                                style="font-size: 11px;"></i><i
-                                                                                data-v-ef94db98=""
-                                                                                data-state="active"
-                                                                                class="ui_icon--star idus-icon-star-fill"
-                                                                                style="font-size: 11px;"></i><i
-                                                                                data-v-ef94db98=""
-                                                                                data-state="active"
-                                                                                class="ui_icon--star idus-icon-star-fill"
-                                                                                style="font-size: 11px;"></i><i
-                                                                                data-v-ef94db98=""
-                                                                                data-state="active"
-                                                                                class="ui_icon--star idus-icon-star-fill"
-                                                                                style="font-size: 11px;"></i><i
-                                                                                data-v-ef94db98=""
-                                                                                data-state="active"
-                                                                                class="ui_icon--star idus-icon-star-fill"
-                                                                                style="font-size: 11px;"></i></span>
-                                                                            <span
+
+                                                                <div data-v-14bdd7c0="" class="ui_grid__item">
+                                                                    <div data-v-796f1feb="" data-v-95de9256=""
+                                                                         data-v-14bdd7c0=""
+                                                                         class="base-card card--vertical product"><a
+                                                                            data-v-796f1feb=""
+                                                                            href="/w/product/2796f4e3-f605-4194-ab99-353fbf2e6706"
+                                                                            target="_blank" tabindex="0">
+                                                                        <div data-v-796f1feb=""
+                                                                             class="card-thumb-cover">
+                                                                            <img
                                                                                     data-v-95de9256=""
                                                                                     data-v-796f1feb=""
-                                                                                    class="review-count"> (79) </span>
-                                                                        </div>
-                                                                        <div data-v-95de9256="" data-v-796f1feb=""
-                                                                             class="review-comment">
-                                                                            <div data-v-95de9256=""
-                                                                                 data-v-796f1feb=""
-                                                                                 class="review-comment__badge">
-                                                                                후기
+                                                                                    src="https://image.idus.com/static/ticketdeal/badge_welcomedeal.png"
+                                                                                    alt="웰컴딜 100원" width="51"
+                                                                                    height="51"
+                                                                                    class="Card__thumbImageBadge">
+
+                                                                            <th:block th:if="${productDTO.productImageUploadDTOList}">
+                                                                                <th:block th:each="productImageUploadDTO : ${productDTO.productImageUploadDTOList}">
+
+                                                                            <div data-v-95de9256="" data-v-796f1feb=""
+                                                                                 id="thumb-2796f4e3-f605-4194-ab99-353fbf2e6706"
+                                                                                 class="product-thumb-img"
+                                                                                 th:style="|background-image: url(/product/display?fileName=${productImageUploadDTO.getImageURL()}); width: 251.5px|">
                                                                             </div>
-                                                                            <div data-v-95de9256=""
-                                                                                 data-v-796f1feb=""
-                                                                                 class="review-comment__contents">
-                                                                                맛있었어요 손님상에 두었어요
+
+                                                                                </th:block>
+                                                                            </th:block>
+
+
+
+                                                                            <!---->
+                                                                            <div data-v-95de9256="" data-v-796f1feb=""
+                                                                                 class="product-bookmark">
+                                                                                <button data-v-488f5f82=""
+                                                                                        data-v-95de9256=""
+                                                                                        aria-label="찜하기"
+                                                                                        class="full-button"
+                                                                                        data-v-796f1feb=""
+                                                                                        style="width: 24px; height: 24px;"
+                                                                                        tabindex="0"><i
+                                                                                        data-v-95de9256=""
+                                                                                        data-v-488f5f82=""
+                                                                                        class="sp-icon icon-favorite"></i>
+                                                                                </button>
                                                                             </div>
                                                                         </div>
-                                                                    </div>
+                                                                        <div data-v-796f1feb=""
+                                                                             class="card-info product-info">
+                                                                            <div data-v-95de9256="" data-v-796f1feb=""
+                                                                                 class="product-info__artist-name">
+                                                                                판매자
+                                                                            </div>
+                                                                            <div data-v-95de9256="" data-v-796f1feb=""
+                                                                                 class="product-info__name">
+                                                                                [[${ productDTO.productName }]]
+                                                                            </div>
+                                                                            <div data-v-95de9256="" data-v-796f1feb=""
+                                                                                 class="product-info__price"><span
+                                                                                    data-v-95de9256=""
+                                                                                    data-v-796f1feb=""
+                                                                                    class="sale-rate"> 99% </span>
+
+                                                                                <span data-v-95de9256="" data-v-796f1feb="" class="price-sale"> [[${ productDTO.salePrice }]]
+                                                                                    <span data-v-95de9256="" data-v-796f1feb="" style="font-size: 14px;">원</span>
+                                                                            </span>
+                                                                                <div data-v-95de9256=""
+                                                                                     data-v-796f1feb=""
+                                                                                     class="price-origin--before-sale">
+                                                                                    <del data-v-95de9256="" data-v-796f1feb="">
+                                                                                        [[${ productDTO.price }]]
+                                                                                    </del>
+                                                                                </div>
+                                                                            </div>
+                                                                            <div data-v-95de9256="" data-v-796f1feb=""
+                                                                                 class="product-info__badge-group"
+                                                                                 style="margin-top: 12px;">
+                                                                                <div data-v-2f2bc7d4=""
+                                                                                     data-v-95de9256=""
+                                                                                     class="badge badge-food"
+                                                                                     data-v-796f1feb="">
+                                                                                    안전식품
+                                                                                </div>
+                                                                            </div>
+                                                                            <div data-v-95de9256="" data-v-796f1feb=""
+                                                                                 class="product-info__review">
+                                                                                <div data-v-95de9256=""
+                                                                                     data-v-796f1feb=""
+                                                                                     class="review-rating"><span
+                                                                                        data-v-ef94db98=""
+                                                                                        data-v-95de9256=""
+                                                                                        data-value="4.8"
+                                                                                        class="ui_rating fr"
+                                                                                        data-v-796f1feb=""><i
+                                                                                        data-v-ef94db98=""
+                                                                                        data-state="active"
+                                                                                        class="ui_icon--star idus-icon-star-fill"
+                                                                                        style="font-size: 11px;"></i><i
+                                                                                        data-v-ef94db98=""
+                                                                                        data-state="active"
+                                                                                        class="ui_icon--star idus-icon-star-fill"
+                                                                                        style="font-size: 11px;"></i><i
+                                                                                        data-v-ef94db98=""
+                                                                                        data-state="active"
+                                                                                        class="ui_icon--star idus-icon-star-fill"
+                                                                                        style="font-size: 11px;"></i><i
+                                                                                        data-v-ef94db98=""
+                                                                                        data-state="active"
+                                                                                        class="ui_icon--star idus-icon-star-fill"
+                                                                                        style="font-size: 11px;"></i><i
+                                                                                        data-v-ef94db98=""
+                                                                                        data-state="active"
+                                                                                        class="ui_icon--star idus-icon-star-fill"
+                                                                                        style="font-size: 11px;"></i></span>
+                                                                                    <span
+                                                                                            data-v-95de9256=""
+                                                                                            data-v-796f1feb=""
+                                                                                            class="review-count"> (79) </span>
+                                                                                </div>
+                                                                                <div data-v-95de9256=""
+                                                                                     data-v-796f1feb=""
+                                                                                     class="review-comment">
+                                                                                    <div data-v-95de9256=""
+                                                                                         data-v-796f1feb=""
+                                                                                         class="review-comment__badge">
+                                                                                        후기
+                                                                                    </div>
+                                                                                    <div data-v-95de9256=""
+                                                                                         data-v-796f1feb=""
+                                                                                         class="review-comment__contents">
+                                                                                        맛있었어요 손님상에 두었어요
+                                                                                    </div>
+                                                                                </div>
+                                                                            </div>
+                                                                        </div>
+                                                                    </a></div>
                                                                 </div>
-                                                            </a></div>
-                                                        </div>
                                                             </th:block>
                                                         </th:block>
                                                     </div>
@@ -311,7 +333,6 @@
                                                 <div data-v-14bdd7c0="" class="ui_grid mt10"
                                                      style="width: 100%; display: inline-block;">
                                                     <div data-v-14bdd7c0="" class="ui_grid__cols--4">
-
 
 
                                                         <div data-v-14bdd7c0="" class="ui_grid__item">

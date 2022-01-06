@@ -1,5 +1,8 @@
 <th:block th:replace="~{/layout/basic :: setContent(~{this::content})}">
     <th:block th:fragment="content">
+
+        <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/5.8.2/css/all.min.css"/>
+
         <style type="text/css">/*
 * default browser scrollbar override
 * @include scrollbars(.5em, slategray);
@@ -544,14 +547,13 @@
                                 </ul>
                             </div>
                             <fieldset class="ui-control">
-                                <button type="button" class="ui-btn prev" aria-label="이전"><i
-                                        class="fa fa-angle-left fa-2x"></i></button>
+                                <button type="button" class="ui-btn prev" aria-label="이전">
+                                    <i class="fas fa-angle-left"></i>
+                                </button>
 
                                     <input type="file" name="productimage"><br>
-                                    <input type="submit">
 
                                 <ul class="img-list indicator">
-
                                     <li class="indicator-btn" style="background-image: url(https://image.idus.com/image/files/aa8767e20aad421f92b84d94eefd0764_720.jpg)"></li>
                                 </ul>
                                 <button type="button" class="ui-btn next" aria-label="다음"><i
