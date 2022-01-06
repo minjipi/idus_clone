@@ -2,7 +2,10 @@ package com.idus.web.product.product;
 
 import com.idus.web.product.product.dto.ProductDTO;
 import com.idus.web.product.product.dto.ProductImageUploadDTO;
+import com.idus.web.product.product.dto.UploadResultDTO;
+import net.coobird.thumbnailator.Thumbnailator;
 import org.springframework.beans.factory.annotation.Autowired;
+import org.springframework.beans.factory.annotation.Value;
 import org.springframework.http.HttpHeaders;
 import org.springframework.http.HttpStatus;
 import org.springframework.http.ResponseEntity;
@@ -18,7 +21,11 @@ import java.io.File;
 import java.io.IOException;
 import java.net.URLDecoder;
 import java.nio.file.Files;
+import java.nio.file.Path;
 import java.nio.file.Paths;
+import java.util.ArrayList;
+import java.util.List;
+import java.util.UUID;
 
 @Controller
 @RequestMapping("/product")
@@ -68,6 +75,43 @@ public class ProductController {
         }
         return result;
     }
+
+    @Value("/Users/minz/Desktop/upload")
+    private String uploadPath;
+
+    @PostMapping("/uploadAjax")
+    public ResponseEntity<List<UploadResultDTO>> uploadFile(MultipartFile[] uploadFiles){
+
+        List<UploadResultDTO> resultDTOList = new ArrayList<>();
+
+        for (MultipartFile uploadFile: uploadFiles) {
+
+            if(uploadFile.getContentType().startsWith("image") == false) {
+                return new ResponseEntity<>(HttpStatus.FORBIDDEN);
+            }
+
+            //실제 파일 이름 IE나 Edge는 전체 경로가 들어오므로
+            String originalName = uploadFile.getOriginalFilename();
+            String fileName = originalName.substring(originalName.lastIndexOf("\\") + 1);
+
+            //저장할 파일 이름 중간에 "_"를 이용해서 구분
+            String saveName = uploadPath + File.separator + fileName;
+            Path savePath = Paths.get(saveName);
+
+            try {
+                //원본 파일 저장
+                uploadFile.transferTo(savePath);
+
+                resultDTOList.add(new UploadResultDTO(fileName));
+
+            } catch (IOException e) {
+                e.printStackTrace();
+            }
+
+        }//end for
+        return new ResponseEntity<>(resultDTOList, HttpStatus.OK);
+    }
+
 
 
     @GetMapping("/write")
