@@ -80,3 +80,25 @@ function deleteOption(buttonTag) {
     buttonTag.parentNode.parentNode.remove();
     reGenerateOptionNumber();
 }
+
+function deleteOptionforUpdate(buttonTag) {
+    buttonTag.parentNode.parentNode.previousSibling.remove();
+    buttonTag.parentNode.parentNode.remove();
+    // reGenerateOptionNumber();
+}
+
+function deleteOptionSelectforUpdate(buttonTag) {
+    buttonTag.parentNode.remove();
+    var idx = buttonTag.getAttribute('optionselectidx');
+    console.log(idx);
+    var httpRequest = new XMLHttpRequest();
+    httpRequest.onreadystatechange = function() {
+        if (httpRequest.readyState == XMLHttpRequest.DONE && httpRequest.status == 200 ) {
+            console.log(httpRequest.responseText);
+        }
+    };
+    // POST 방식의 요청은 데이터를 Http 헤더에 포함시켜 전송함.
+    httpRequest.open("POST", "/optionSelect/delete", true);
+    httpRequest.setRequestHeader('Content-type', 'application/x-www-form-urlencoded');
+    httpRequest.send("idx="+idx);
+}

@@ -37,7 +37,6 @@ public class ProductController {
     public void read(int idx, Model model) {
 //       read 메소드 호출 시 웹브라우저가 컨트롤러에게 idx, 비어있는 model을 전달.
 
-
         ProductDTO productDTO = productService.readService(idx);
 //        idx 값을 담은 read 서비스의 read 함수 값을, ProductDTO 타입의 productDTO에 저장.
 //        ProductDTO 타입의 productDTO에, productService의 readService에 idx을 전달
@@ -48,6 +47,26 @@ public class ProductController {
         model.addAttribute("dto", productDTO);
 //        productDTO를 dto라는 이름으로 model에 (addAttribute)추가함.
     }
+
+    @GetMapping("/update")
+    public String productupdate_get(int idx, Model model) {
+        ProductDTO productDTO = productService.readService(idx);
+        System.out.println(productDTO.toString());
+        model.addAttribute("dto", productDTO);
+
+//        model.addAttribute("dto", productService.readService(idx));
+
+        return "/product/update";
+    }
+
+    @PostMapping("/update")
+    public String productupdate_post(ProductDTO productDTO) {
+//        productService.updateService(productDTO);
+
+        return "redirect:/";
+    }
+
+
 
     @GetMapping("/display")
     public ResponseEntity<byte[]> getFile(String fileName, String size) {
@@ -113,7 +132,6 @@ public class ProductController {
     }
 
 
-
     @GetMapping("/write")
     public void write_get() {
 
@@ -121,8 +139,6 @@ public class ProductController {
 
     @PostMapping("/write")
     public String write_post(ProductDTO productDTO, MultipartFile productimage) {
-
-
 
         productDTO.getProductImageUploadDTOList().add(new ProductImageUploadDTO(productimage.getOriginalFilename()));
 
@@ -134,9 +150,12 @@ public class ProductController {
             e.printStackTrace();
         }
 
-
         System.out.println(productDTO.toString());
         productService.saveService(productDTO);
         return "redirect:/";
     }
+
+
+
+
 }

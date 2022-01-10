@@ -1,4 +1,4 @@
-<th:block th:replace="~{/layout/basic :: setContent(~{this::content})}">
+<th:block th:replace="~{/layout/basic :: setContent(~{this::content})}" xmlns:th="http://www.w3.org/1999/xhtml">
     <th:block th:fragment="content">
 
         <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/5.8.2/css/all.min.css"/>
@@ -530,7 +530,7 @@
         }
         </style>
 
-        <form action="/product/write" method="post" enctype="multipart/form-data">
+        <form action="/product/update" method="post" enctype="multipart/form-data">
             <div id="content" class="content relative" data-page="prd-detail">
                 <div id="sticky-start" style="position: absolute; top: 25px;"></div>
                 <div class="inner-w mobile-full">
@@ -540,7 +540,10 @@
                              style="touch-action: pan-y; user-select: none; -webkit-user-drag: none; -webkit-tap-highlight-color: rgba(0, 0, 0, 0);">
                             <div class="outer-frame">
                                 <ul class="img-view inner-frame">
-
+                                    <li class="ui-slide" data-trigger-preview="open"
+                                        style="background-image: url(); width: 560px;"
+                                        data-index="0">
+                                    </li>
                                 </ul>
                             </div>
                             <fieldset class="ui-control">
@@ -548,19 +551,18 @@
                                     <i class="fas fa-angle-left"></i>
                                 </button>
 
-                                    <input type="file" class="custom-file-input" name="productimage" multiple><br>
+                                <input type="file" class="custom-file-input" name="productimage"><br>
 
                                 <ul class="img-list indicator">
                                     <li class="indicator-btn" style="background-image: url()"></li>
                                 </ul>
-                                <button type="button" class="ui-btn next" aria-label="다음" ><i
+                                <button type="button" class="ui-btn next" aria-label="다음"><i
                                         class="fa fa-angle-right fa-2x"></i></button>
                             </fieldset>
                         </div>
                     </section>
                     <aside class="sticky_aside product_detail" data-ui="sticky_aside" data-state="" data-offset="36">
                         <div class="sticky_aside_product">
-                            <!-- artist_card -->
                             <!-- artist_card -->
                             <div class="artist_card">
                                 <div class="artist_card__split">
@@ -575,47 +577,18 @@
                                 </div>
                                 <div class="artist_card__split"></div>
                             </div>
-
-                            <input name="productName" type="text" class="sticky_aside__produc-title">
+                            <input type="text" name="productName" th:value="${ dto.productName }" class="sticky_aside__produc-title">
 
                             <div data-v-ae3f0052="" class="product-detail-info">
                                 <div data-v-3ee9a3ba="" data-v-ae3f0052="" class="price_tag-detail">
-                                    <mark data-v-3ee9a3ba="" class="sticky_aside__marked right">
-                                        <button data-v-488f5f82="" data-v-6a60e66d="" data-v-3ee9a3ba=""
-                                                aria-label="찜하기"
-                                                class="full-button" style="width: 24px; height: 100%;">
-                                            <div data-v-6a60e66d="" data-v-488f5f82=""
-                                                 class="product-detail-star-text-box">
-                                                <div data-v-6a60e66d="" data-v-488f5f82=""
-                                                     class="product-detail-star-box">
-                                                    <i data-v-6a60e66d="" data-v-488f5f82=""
-                                                       class="product-detail-star idus-icon-favorite-border-p-5"></i>
-                                                </div>
-                                                <div data-v-6a60e66d="" data-v-488f5f82="" class="star-count-text-box">
-                                                    <p
-                                                            data-v-6a60e66d="" data-v-488f5f82=""
-                                                            class="star-count-text">
-                                                        11,195
-                                                    </p></div>
-                                            </div>
-                                        </button>
-                                        <button data-v-3ee9a3ba="" data-ui="url-copy" data-ui-option="short"
-                                                data-icon-event="hover" data-clipboard-message="작품 URL이 복사되었습니다."
-                                                class="product-detail-share-button">
-                                            <div data-v-3ee9a3ba="" class="product-detail-share-box"><i
-                                                    data-v-3ee9a3ba=""
-                                                    class="idus-icon-share-p-5"></i>
-                                            </div>
-                                        </button>
-                                    </mark>
-
 
 
                                     <span data-v-3ee9a3ba="">
                                         <span data-v-3ee9a3ba="" class="price_tag__hilight">
-                                            <em data-v-3ee9a3ba="">
-                                            <strong data-v-3ee9a3ba="" class="sold-price"></strong>
-                                            </em>%</span>
+                                                <em th:with="sales = 100 * ( 1 - (${dto.salePrice} / ${dto.price}))"
+                                                    th:text="${#numbers.formatInteger(sales, 0, 'COMMA')}"></em>
+                                                %
+                                            </span>
 
                                         <script>
                                             function keytest(event){
@@ -624,22 +597,13 @@
                                         </script>
 
                                         <span data-v-3ee9a3ba="" class="price_tag__strong">
-                                            <input type="text" name="salePrice" placeholder="할인된 가격" onkeyup="keytest(this)">
-
-
+                                            <input type="text" name="salePrice" placeholder="할인된 가격" onkeyup="keytest(this)" th:value="${dto.salePrice}">원
                                         </span>
 
-
                                         <del data-v-3ee9a3ba="" class="price_tag__crossout">
-                                            <input type="text" name="price" placeholder="원래 가격" onkeyup="keytest(this)">
+                                            <input type="text" name="price" placeholder="원래 가격" onkeyup="keytest(this)" th:value="${dto.price}">원
                                         </del>
                                     </span>
-
-
-
-
-
-
 
 
                                     <div data-v-3ee9a3ba="" id="marker"></div>
@@ -675,8 +639,7 @@
                                                     </td>
                                                     <td data-v-9e98616a="" class="data-row__content">
                                                         <span data-v-7b67a23d="" data-v-9e98616a="">
-                                                            <input name="quantity" type="text"
-                                                                   class="sticky_aside__produc-title">
+                                                            <input name="quantity" type="text" class="sticky_aside__produc-title" th:value="${dto.quantity}">
                                                         </span>
                                                     </td>
                                                 </tr>
@@ -788,47 +751,65 @@
                                         <i data-v-de09a10e="" class="idus-icon-arrow-down"></i>
                                     </button>
                                     <button onclick="addOption()" data-v-de09a10e="" type="button"
-                                            class="data-row__title">
+                                            class="ui_btn select_group_trigger">
                                         옵션 추가
+                                        <i data-v-de09a10e="" class="idus-icon-arrow-down"></i>
                                     </button>
 
                                     <div data-v-de09a10e="" id="optionScrollable"
                                          class="option_select_group Scrollable"
                                          style="">
 
-                                        <div data-v-de09a10e="" id="select_group__body" class="select_group__body">
-                                            <br>
-                                            <ol data-v-de09a10e="" class="select_group__parent_list active">
-                                                <li data-v-de09a10e="">
-                                                    <span data-v-de09a10e="">
-                                                        <input type="text" name="optionDTOList[0].title" placeholder="옵션">
-                                                    </span>
-                                                    <span data-v-de09a10e="" class="align_right">
-                                                    <button onclick="addOptionSelect(this, event)" data-v-de09a10e="" class="idus-icon-arrow-down">
-                                                    </button>
-                                                        <button onclick="deleteOption(this)" data-v-de09a10e="" class="idus-icon-close"></button>
-                                                    </span>
 
-                                                </li>
 
-                                                <div data-v-de09a10e="" class="bottom-border full">
-                                                </div>
 
-                                                <ul data-v-de09a10e="" class="select_group__child_list active">
-                                                    <!--                                                <ul data-v-de09a10e="" class="select_group__child_list">-->
-                                                    <li data-v-de09a10e="">
+
+                                        <th:block th:if="${dto.optionDTOList}">
+                                            <th:block th:each="optionDTO : ${dto.optionDTOList}">
+                                                <ol data-v-de09a10e="" class="select_group__parent_list active"
+                                                    th:classappend="${optionDTOStat.index} == 0 ? 'active'">
+                                                    <li class="optionli" data-v-de09a10e=""
+                                                        th:optionindex="${optionDTOStat.index}">
+
                                                         <span data-v-de09a10e="">
-                                                            <input type="text" name="optionDTOList[0].optionSelectDTOList[0].title" placeholder="선택">
-                                                            <input type="text" name="optionDTOList[0].optionSelectDTOList[0].price" placeholder="추가금액">
-
+                                                        <input type="text" name="optionDTOList[0].title" placeholder="옵션" th:value="${optionDTO.title}">
                                                         </span>
-                                                        <button onclick="" data-v-de09a10e=""
-                                                                class="idus-icon-close"></button>
+                                                        <span data-v-de09a10e="" class="align_right"></span>
+                                                        <button onclick="deleteOptionforUpdate(this)" data-v-de09a10e="" class="idus-icon-close"></button>
                                                     </li>
-                                                </ul>
-                                            </ol>
-                                        </div>
-                                    </div>
+                                                    <div data-v-de09a10e="" class="bottom-border full"></div>
+                                                    <ul data-v-de09a10e=""
+                                                        class="select_group__child_list active">
+
+                                                        <th:block th:if="${optionDTO.optionSelectDTOList}">
+                                                            <th:block
+                                                                    th:each="optionSelect : ${optionDTO.optionSelectDTOList}">
+
+                                                                <li class="optionSelectli" data-v-de09a10e="">
+                                                                    <span data-v-de09a10e="">
+                                                                    <input type="text" name="optionDTOList[0].optionSelectDTOList[0].title" placeholder="선택" th:value="${ optionSelect.title }">
+                                                                    <input type="text" name="optionDTOList[0].optionSelectDTOList[0].price" placeholder="추가금액" th:value="${ optionSelect.price }">
+                                                                    </span>
+                                                                    <button th:optionselectidx="${ optionSelect.idx }" type="button" onclick="deleteOptionSelectforUpdate(this)" data-v-de09a10e="" class="idus-icon-close" ></button>
+                                                                </li>
+
+                                                                <input type="hidden"
+                                                                       th:id="${ optionSelect.title }"
+                                                                       th:value="${ optionSelect.price }">
+
+                                                            </th:block>
+                                                        </th:block>
+                                                    </ul>
+                                                </ol>
+                                            </th:block>
+                                        </th:block>
+
+
+
+
+
+
+
 
 
                                     <dl data-v-de09a10e="" class="checkout_product__cost_label">
@@ -842,12 +823,10 @@
 
                                     </dl>
                                 </div>
-                                <!--                                <fieldset data-v-de09a10e="" class="checkout_product__btn_group show1">-->
                                 <button data-v-de09a10e="" type="submit" data-to="present" data-pay-type="present"
                                         class="ui_btn--red present_sub">
                                     작성완료
                                 </button>
-                                <!--                                </fieldset>-->
 
 
                                 <div data-v-de09a10e="" class="">
@@ -942,24 +921,8 @@
                             if (httpRequest.readyState == XMLHttpRequest.DONE && httpRequest.status == 200 ) {
                                 console.log(httpRequest.responseText);
                                 var json = JSON.parse(httpRequest.responseText)
-                                var li_tag = '';
-
-                                for(var i = 0 ; i < json.length; i ++) {
-                                    console.log(json[i]);
-                                    if (i==0) {
-                                        li_tag += `<li class="ui-slide" data-trigger-preview="open" style="background-image: url('/product/display?fileName=`+json[i].fileName+`'); width: 560px; display: list-item;" data-index="0">
-                                                    </li>`;
-                                    } else {
-                                        li_tag += `<li class="ui-slide" data-trigger-preview="open" style="background-image: url('/product/display?fileName=`+json[i].fileName+`'); width: 560px; display: none;" data-index="`+i+`">
-                                                    </li>`;
-                                    }
-                                }
-
-                                document.getElementsByClassName("img-view inner-frame")[0].innerHTML = li_tag;
-
-
-                                // document.getElementsByClassName('ui-slide')[0].style.backgroundImage = "url('/product/display?fileName="+json[0].fileName+"')"
-                                // document.getElementsByClassName('indicator-btn')[0].style.backgroundImage = "url('/product/display?fileName="+json[0].fileName+"')"
+                                document.getElementsByClassName('ui-slide')[0].style.backgroundImage = "url('/product/display?fileName="+json[0].fileName+"')"
+                                document.getElementsByClassName('indicator-btn')[0].style.backgroundImage = "url('/product/display?fileName="+json[0].fileName+"')"
                             }
                         };
                         // POST 방식의 요청은 데이터를 Http 헤더에 포함시켜 전송함.
@@ -969,38 +932,6 @@
                     sendRequest();
                 });
 
-            //    이미지 넘기기 액션.
-                document.getElementsByClassName("ui-btn next")[0].addEventListener('click',function () {
-                    var uiSlides = document.getElementsByClassName("ui-slide");
-
-                    //다음 이미지 디스플레이 보이게
-                    uiSlides[1].style.display = "list-item";
-                    var firstLi = uiSlides[0].outerHTML;
-                    uiSlides[0].remove();
-
-
-                    document.getElementsByClassName("img-view inner-frame")[0].innerHTML = document.getElementsByClassName("img-view inner-frame")[0].innerHTML + firstLi;
-
-                    uiSlides = document.getElementsByClassName("ui-slide");
-
-                    //여기에 마진 레프트 이용해서 애니메이션을 주면 됨
-                    // uiSlides[uiSlides.length].style.display = 'none';
-
-                });
-
-                document.getElementsByClassName("ui-btn prev")[0].addEventListener('click',function () {
-                    var uiSlides = document.getElementsByClassName("ui-slide");
-                    var uiSlidesLength = document.getElementsByClassName("ui-slide").length - 1;
-
-                    uiSlides[document.getElementsByClassName("ui-slide").length - 2].style.display = "list-item";
-                    var lastLi = uiSlides[uiSlidesLength].outerHTML;
-                    uiSlides[uiSlidesLength].remove();
-
-                    document.getElementsByClassName("img-view inner-frame")[0].innerHTML = lastLi + document.getElementsByClassName("img-view inner-frame")[0].innerHTML;
-
-
-
-                });
             }
         </script>
 

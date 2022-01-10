@@ -266,4 +266,20 @@ public class ProductService {
     return productDTOList;
     }
 
+//    public void updateService(ProductDTO productDTO) {
+//
+//        Product product = Product.builder()
+//                .idx(productDTO.getIdx())
+//                .productName(productDTO.getProductName())
+//                .price(productDTO.getPrice())
+//                .salePrice(productDTO.getSalePrice())
+//                .quantity(productDTO.getQuantity())
+//                .productInfo(productDTO.getProductInfo())
+//                .tags(productDTO.getTags())
+//
+//                .optionDTOList(optionDTOList)
+////                .productImageUploadDTOList(productImageUploadDTOList)
+//                .build();
+//    }
+
 }
