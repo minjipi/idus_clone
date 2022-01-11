@@ -75,10 +75,34 @@ function addOptionSelect(buttonTag, event) {
 
 }
 
+function deleteOptionSelect(buttonTag) {
+
+    console.log("deleteOptionSelect: " + buttonTag);
+    console.log("parentNode: " + buttonTag.parentNode.nextSibling);
+    // buttonTag.parentNode.parentNode.previousSibling.remove();
+
+    // 한개 이상일 경우.
+    if (buttonTag.parentNode.nextSibling != null){
+        buttonTag.parentNode.parentNode.remove();
+        reGenerateOptionNumber();
+
+
+    } else {
+        alert("옵션 선택은 최소 1개 입니다.");
+    }
+
+}
+
 function deleteOption(buttonTag) {
-    buttonTag.parentNode.parentNode.previousSibling.remove();
-    buttonTag.parentNode.parentNode.remove();
-    reGenerateOptionNumber();
+
+    if (document.getElementsByClassName("select_group__parent_list")[1] != null){
+        // buttonTag.parentNode.parentNode.previousSibling.remove();
+        buttonTag.parentNode.parentNode.parentNode.remove();
+        reGenerateOptionNumber();
+
+    } else {
+        alert("옵션은 최소 1개 입니다.");
+    }
 }
 
 function deleteOptionforUpdate(buttonTag) {

@@ -226,7 +226,7 @@ public class ProductService {
         }
     }
 
-    public List<ProductDTO> listService() {
+    public Set<ProductDTO> listService() {
         List<Object[]> result = productRepository.getProductWithImage();
 
         //      레포지터리의 getProductWithImage 메소드에 리스트 타입의 result 변수생성
@@ -238,7 +238,7 @@ public class ProductService {
         //  1    | product1, ProductImageUpload1-2
         //  2    | product2, ProductImageUpload2-1
 
-        List<ProductDTO> productDTOList = new ArrayList<>();
+        Set<ProductDTO> productDTOList = new HashSet<>();
 
         result.forEach(arr -> {
             Product product = (Product) arr[0];
@@ -249,21 +249,27 @@ public class ProductService {
                     .price(product.getPrice())
                     .build();
 
-            List<ProductImageUploadDTO> productImageUploadDTOList = new ArrayList<>();
-
-            ProductImageUpload productImageUpload = (ProductImageUpload) arr[1];
-            if(productImageUpload != null) {
-                ProductImageUploadDTO productImageUploadDTO = ProductImageUploadDTO.builder()
-                        .imgName(productImageUpload.getImgName())
-                        .build();
-                productImageUploadDTOList.add(productImageUploadDTO);
-                if(productDTO.getIdx()==productImageUpload.getProduct().idx){
-                    productDTO.setProductImageUploadDTOList(productImageUploadDTOList);
-                }
-            }
             productDTOList.add(productDTO);
         });
-    return productDTOList;
+
+//        Set에 저장된 프로덕트의 번호랑 이미지에서 프로덕트의 번호가 일치하면, 프로덕트의 이미지 리스트에 해당 이미지를 추가.
+//        product 랑
+        result.forEach(arr -> {
+            ProductImageUpload productImageUpload = (ProductImageUpload) arr[1];
+
+            if(productImageUpload != null) {
+
+                productDTOList.forEach(productDTO -> {
+                    if (productDTO.getIdx() == productImageUpload.getProduct().idx) {
+                        ProductImageUploadDTO productImageUploadDTO = ProductImageUploadDTO.builder()
+                                .imgName(productImageUpload.getImgName())
+                                .build();
+                        productDTO.getProductImageUploadDTOList().add(productImageUploadDTO);
+                    }
+                });
+            }
+        });
+        return productDTOList;
     }
 
 //    public void updateService(ProductDTO productDTO) {
@@ -281,5 +287,9 @@ public class ProductService {
 ////                .productImageUploadDTOList(productImageUploadDTOList)
 //                .build();
 //    }
+
+    public void deleteService(int idx) {
+        productRepository.deleteById(idx);
+    }
 
 }

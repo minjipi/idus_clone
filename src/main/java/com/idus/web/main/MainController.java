@@ -11,6 +11,7 @@ import org.springframework.web.bind.annotation.RestController;
 
 import java.util.ArrayList;
 import java.util.List;
+import java.util.Set;
 
 @Controller
 @RequestMapping("/")
@@ -21,7 +22,7 @@ public class MainController {
     @GetMapping("/")
     public String main(Model model){
 
-        List<ProductDTO> productDTOList = productService.listService();
+        Set<ProductDTO> productDTOList = productService.listService();
         model.addAttribute("productDTOList", productDTOList);
         System.out.println("============== productDTOList: " + productDTOList);
 

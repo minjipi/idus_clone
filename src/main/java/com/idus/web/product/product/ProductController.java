@@ -66,6 +66,11 @@ public class ProductController {
         return "redirect:/";
     }
 
+    @GetMapping("/delete")
+    public String delete(int idx){
+        productService.deleteService(idx);
+        return "redirect:/";
+    }
 
 
     @GetMapping("/display")
@@ -138,17 +143,7 @@ public class ProductController {
     }
 
     @PostMapping("/write")
-    public String write_post(ProductDTO productDTO, MultipartFile productimage) {
-
-        productDTO.getProductImageUploadDTOList().add(new ProductImageUploadDTO(productimage.getOriginalFilename()));
-
-        try {
-            System.out.println(productimage.getOriginalFilename());
-            productimage.transferTo(Paths.get("/Users/minz/Desktop/upload/" + productimage.getOriginalFilename()));
-
-        } catch (IOException e) {
-            e.printStackTrace();
-        }
+    public String write_post(ProductDTO productDTO) {
 
         System.out.println(productDTO.toString());
         productService.saveService(productDTO);

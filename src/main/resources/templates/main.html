@@ -183,12 +183,15 @@
                                                             <th:block th:each="productDTO : ${productDTOList}">
 
                                                                 <div data-v-14bdd7c0="" class="ui_grid__item">
+
                                                                     <div data-v-796f1feb="" data-v-95de9256=""
                                                                          data-v-14bdd7c0=""
-                                                                         class="base-card card--vertical product"><a
+                                                                         class="base-card card--vertical product">
+                                                                        <a
                                                                             data-v-796f1feb=""
-                                                                            href="/w/product/2796f4e3-f605-4194-ab99-353fbf2e6706"
+                                                                            th:href="${'/product/read?idx='+productDTO.idx}"
                                                                             target="_blank" tabindex="0">
+
                                                                         <div data-v-796f1feb=""
                                                                              class="card-thumb-cover">
                                                                             <img
@@ -202,10 +205,13 @@
                                                                             <th:block th:if="${productDTO.productImageUploadDTOList}">
                                                                                 <th:block th:each="productImageUploadDTO : ${productDTO.productImageUploadDTOList}">
 
+
+
                                                                             <div data-v-95de9256="" data-v-796f1feb=""
                                                                                  id="thumb-2796f4e3-f605-4194-ab99-353fbf2e6706"
                                                                                  class="product-thumb-img"
                                                                                  th:style="|background-image: url(/product/display?fileName=${productImageUploadDTO.getImageURL()}); width: 251.5px|">
+<!--                                                                                <a th:href="${'/product/read?idx='+productDTO.idx}"></a>-->
                                                                             </div>
 
                                                                                 </th:block>

@@ -820,9 +820,8 @@
                                                         <span data-v-de09a10e="">
                                                             <input type="text" name="optionDTOList[0].optionSelectDTOList[0].title" placeholder="선택">
                                                             <input type="text" name="optionDTOList[0].optionSelectDTOList[0].price" placeholder="추가금액">
-
                                                         </span>
-                                                        <button onclick="" data-v-de09a10e=""
+                                                        <button onclick="deleteOptionSelect(this)" data-v-de09a10e=""
                                                                 class="idus-icon-close"></button>
                                                     </li>
                                                 </ul>
@@ -944,8 +943,12 @@
                                 var json = JSON.parse(httpRequest.responseText)
                                 var li_tag = '';
 
+                                var str = "";
+
                                 for(var i = 0 ; i < json.length; i ++) {
                                     console.log(json[i]);
+                                    str += "<input type='hidden' name='productImageUploadDTOList["+i+"].imgName' value='"+json[i].fileName +"'>";
+
                                     if (i==0) {
                                         li_tag += `<li class="ui-slide" data-trigger-preview="open" style="background-image: url('/product/display?fileName=`+json[i].fileName+`'); width: 560px; display: list-item;" data-index="0">
                                                     </li>`;
@@ -956,6 +959,7 @@
                                 }
 
                                 document.getElementsByClassName("img-view inner-frame")[0].innerHTML = li_tag;
+                                document.getElementsByClassName("box")[0].innerHTML = str;
 
 
                                 // document.getElementsByClassName('ui-slide')[0].style.backgroundImage = "url('/product/display?fileName="+json[0].fileName+"')"

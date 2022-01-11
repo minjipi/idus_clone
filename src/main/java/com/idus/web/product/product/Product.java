@@ -1,5 +1,6 @@
 package com.idus.web.product.product;
 
+import com.idus.web.product.option.Option;
 import com.idus.web.product.seller.Seller;
 import lombok.AllArgsConstructor;
 import lombok.Builder;
@@ -30,5 +31,11 @@ public class Product {
 
     @ManyToOne(fetch = FetchType.LAZY)
     private Seller seller;
+
+    @OneToMany(mappedBy = "product", cascade = CascadeType.REMOVE)
+    private List<ProductImageUpload> productImageUploads;
+
+    @OneToMany(mappedBy = "product", cascade = CascadeType.REMOVE)
+    private List<Option> options;
 
 }
