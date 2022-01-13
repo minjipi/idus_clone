@@ -203,18 +203,15 @@
                                                                                     class="Card__thumbImageBadge">
 
                                                                             <th:block th:if="${productDTO.productImageUploadDTOList}">
-                                                                                <th:block th:each="productImageUploadDTO : ${productDTO.productImageUploadDTOList}">
-
-
+<!--                                                                                <th:block th:each="productImageUploadDTO : ${productDTO.productImageUploadDTOList}">-->
 
                                                                             <div data-v-95de9256="" data-v-796f1feb=""
                                                                                  id="thumb-2796f4e3-f605-4194-ab99-353fbf2e6706"
                                                                                  class="product-thumb-img"
-                                                                                 th:style="|background-image: url(/product/display?fileName=${productImageUploadDTO.getImageURL()}); width: 251.5px|">
+                                                                                 th:style="|background-image: url(/product/display?fileName=${productDTO.productImageUploadDTOList[0].getImageURL()}); width: 251.5px|">
 <!--                                                                                <a th:href="${'/product/read?idx='+productDTO.idx}"></a>-->
                                                                             </div>
-
-                                                                                </th:block>
+<!--                                                                                </th:block>-->
                                                                             </th:block>
 
 

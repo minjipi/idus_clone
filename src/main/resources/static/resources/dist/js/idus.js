@@ -38,8 +38,7 @@ function hideOption() {
 function addOption() {
     var select_group__body = document.getElementById('select_group__body');
 
-    select_group__body.innerHTML = select_group__body.innerHTML + `<br>
-                <ol data-v-de09a10e="" class="select_group__parent_list active">
+    select_group__body.innerHTML = select_group__body.innerHTML + `<ol data-v-de09a10e="" class="select_group__parent_list active">
                     <li data-v-de09a10e="">
                         <span data-v-de09a10e="">
                             <input type="text" name="optionDTOList[1]" placeholder="옵션">
@@ -47,49 +46,52 @@ function addOption() {
                         <span data-v-de09a10e="" class="align_right">
                             <button onclick="addOptionSelect(this, event)" data-v-de09a10e="" class="idus-icon-arrow-down">
                             </button> 
-                            <button onclick="deleteOption(this)" data-v-de09a10e="" class="idus-icon-close">
-                            </button>
+                            <a onclick="deleteOption(this)" data-v-de09a10e="" class="idus-icon-close">
+                            </a>
                         </span>          
                     </li>
                                                 
                     <div data-v-de09a10e="" class="bottom-border full"></div>
                     
-                    <ul data-v-de09a10e="" class="select_group__child_list active">
-                        <li data-v-de09a10e="">
+                    <ul data-v-de09a10e="" class="select_group__child_list active"><li data-v-de09a10e="">
                             <span data-v-de09a10e="">
                                 <input type="text" name="selectOption" placeholder="선택">
                                 <input type="text" name="optionDTOList[0].optionSelectDTOList[0].price" placeholder="추가금액">
                             </span>
-                             <button onclick="" data-v-de09a10e="" class="idus-icon-close"></button>
-                        </li>
-                   </ul>
+                             <a onclick="deleteOptionSelect(this)" data-v-de09a10e="" class="idus-icon-close"></a>
+                        </li></ul>
                 </ol>`;
-    reGenerateOptionNumber();
+    // reGenerateOptionNumber();
 }
 
 function addOptionSelect(buttonTag, event) {
     event.preventDefault();
     var ulTag = buttonTag.parentNode.parentNode.parentNode.getElementsByTagName('ul')[0];
-    ulTag.innerHTML = ulTag.innerHTML + `<li><span><input type="text" name="" placeholder="선택"></span><input type="text" name="optionDTOList[0].optionSelectDTOList[0].price" placeholder="추가금액"><button onclick="" data-v-de09a10e="" class="idus-icon-close"></button></li>`;
-    reGenerateOptionNumber();
+    ulTag.innerHTML = ulTag.innerHTML + `<li><span><input type="text" name="" placeholder="선택"></span><input type="text" name="optionDTOList[0].optionSelectDTOList[0].price" placeholder="추가금액"><a onclick="deleteOptionSelect(this)" data-v-de09a10e="" class="idus-icon-close"></a></li>`;
+    // reGenerateOptionNumber();
 
 }
 
 function deleteOptionSelect(buttonTag) {
+    var option_tag = document.getElementsByClassName('select_group__parent_list');
+    var option_select_tag = buttonTag.parentNode;
 
-    console.log("deleteOptionSelect: " + buttonTag);
-    console.log("parentNode: " + buttonTag.parentNode.nextSibling);
-    // buttonTag.parentNode.parentNode.previousSibling.remove();
-
-    // 한개 이상일 경우.
-    if (buttonTag.parentNode.nextSibling != null){
-        buttonTag.parentNode.parentNode.remove();
-        reGenerateOptionNumber();
-
-
-    } else {
+    // 옵션이 하나이고 옵션 셀렉트가 하나이면 삭제가 되면 안된다
+    if (option_tag.length == 1 && option_select_tag.nextSibling == null) {
         alert("옵션 선택은 최소 1개 입니다.");
     }
+    // 옵션셀렉트 2 이상. 옵션셀렉트 삭제.
+    else if (option_select_tag.nextSibling != null) {
+        option_select_tag.remove();
+    }
+    // 옵션이 2개 이상, 삭제하려는 옵션셀렉트의 옵션에 있는 옵션셀렉트가 1. 옵션+옵션셀렉트 삭제.
+    else if (option_tag.length != 1 && option_select_tag.nextSibling == null) {
+        buttonTag.parentNode.parentNode.parentNode.remove();
+    }
+
+
+
+
 
 }
 
@@ -98,7 +100,7 @@ function deleteOption(buttonTag) {
     if (document.getElementsByClassName("select_group__parent_list")[1] != null){
         // buttonTag.parentNode.parentNode.previousSibling.remove();
         buttonTag.parentNode.parentNode.parentNode.remove();
-        reGenerateOptionNumber();
+        // reGenerateOptionNumber();
 
     } else {
         alert("옵션은 최소 1개 입니다.");

@@ -685,8 +685,9 @@
 
 
                                         <div data-v-9e98616a="" class="balloon__content">
-                                            <button data-v-9e98616a="" type="button" class="close_btn mobile-show"><i
-                                                    data-v-9e98616a="" class="idus-icon-close"></i></button>
+                                            <i data-v-9e98616a="" type="button" class="close_btn mobile-show">
+                                                <i data-v-9e98616a="" class="idus-icon-close"></i>
+                                            </i>
                                             <div data-v-7b67a23d="" data-v-9e98616a="" class="point-balloon">
                                                 <table data-v-7b67a23d="" data-v-9e98616a="" class="balloon-table">
                                                     <tr data-v-7b67a23d="" data-v-9e98616a="">
@@ -796,17 +797,15 @@
                                          class="option_select_group Scrollable"
                                          style="">
 
-                                        <div data-v-de09a10e="" id="select_group__body" class="select_group__body">
-                                            <br>
-                                            <ol data-v-de09a10e="" class="select_group__parent_list active">
+                                        <div data-v-de09a10e="" id="select_group__body" class="select_group__body"><ol data-v-de09a10e="" class="select_group__parent_list active">
                                                 <li data-v-de09a10e="">
                                                     <span data-v-de09a10e="">
                                                         <input type="text" name="optionDTOList[0].title" placeholder="옵션">
                                                     </span>
                                                     <span data-v-de09a10e="" class="align_right">
-                                                    <button onclick="addOptionSelect(this, event)" data-v-de09a10e="" class="idus-icon-arrow-down">
-                                                    </button>
-                                                        <button onclick="deleteOption(this)" data-v-de09a10e="" class="idus-icon-close"></button>
+                                                        <button onclick="addOptionSelect(this, event)" data-v-de09a10e="" class="idus-icon-arrow-down">
+                                                        </button>
+                                                        <i onclick="deleteOption(this)" data-v-de09a10e="" class="idus-icon-close"></i>
                                                     </span>
 
                                                 </li>
@@ -815,16 +814,14 @@
                                                 </div>
 
                                                 <ul data-v-de09a10e="" class="select_group__child_list active">
-                                                    <!--                                                <ul data-v-de09a10e="" class="select_group__child_list">-->
                                                     <li data-v-de09a10e="">
                                                         <span data-v-de09a10e="">
                                                             <input type="text" name="optionDTOList[0].optionSelectDTOList[0].title" placeholder="선택">
                                                             <input type="text" name="optionDTOList[0].optionSelectDTOList[0].price" placeholder="추가금액">
                                                         </span>
-                                                        <button onclick="deleteOptionSelect(this)" data-v-de09a10e=""
-                                                                class="idus-icon-close"></button>
-                                                    </li>
-                                                </ul>
+                                                        <i onclick="deleteOptionSelect(this)" data-v-de09a10e=""
+                                                                class="idus-icon-close"></i>
+                                                    </li></ul>
                                             </ol>
                                         </div>
                                     </div>
@@ -980,6 +977,16 @@
                     //다음 이미지 디스플레이 보이게
                     uiSlides[1].style.display = "list-item";
                     var firstLi = uiSlides[0].outerHTML;
+                    //여기에 마진 레프트 이용해서 애니메이션을 주면 됨
+
+
+
+                    for(var i=0; i>-590; i=i-0.1) {
+                        document.getElementsByClassName("img-view inner-frame")[0].style.marginLeft = i;
+                    }
+                    document.getElementsByClassName("img-view inner-frame")[0].style.marginLeft = 0;
+
+
                     uiSlides[0].remove();
 
 
@@ -987,8 +994,8 @@
 
                     uiSlides = document.getElementsByClassName("ui-slide");
 
-                    //여기에 마진 레프트 이용해서 애니메이션을 주면 됨
-                    // uiSlides[uiSlides.length].style.display = 'none';
+
+                    uiSlides[uiSlides.length-1].style.display = 'none';
 
                 });
 
