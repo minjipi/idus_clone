@@ -980,11 +980,10 @@
                     //여기에 마진 레프트 이용해서 애니메이션을 주면 됨
 
 
-
-                    for(var i=0; i>-590; i=i-0.1) {
-                        document.getElementsByClassName("img-view inner-frame")[0].style.marginLeft = i;
-                    }
-                    document.getElementsByClassName("img-view inner-frame")[0].style.marginLeft = 0;
+                    // for(var i=0; i>-590; i=i-0.1) {
+                    //     document.getElementsByClassName("img-view inner-frame")[0].style.marginLeft = i;
+                    // }
+                    // document.getElementsByClassName("img-view inner-frame")[0].style.marginLeft = 0;
 
 
                     uiSlides[0].remove();
@@ -993,7 +992,6 @@
                     document.getElementsByClassName("img-view inner-frame")[0].innerHTML = document.getElementsByClassName("img-view inner-frame")[0].innerHTML + firstLi;
 
                     uiSlides = document.getElementsByClassName("ui-slide");
-
 
                     uiSlides[uiSlides.length-1].style.display = 'none';
 

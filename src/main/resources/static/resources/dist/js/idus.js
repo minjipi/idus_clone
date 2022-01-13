@@ -2,11 +2,13 @@ function reGenerateOptionNumber() {
     var select_group__body = document.getElementById('select_group__body');
     var olList = select_group__body.getElementsByTagName('ol');
 
-    for (var i = 0; i < olList.length; i++) {
+    for (var i = 0; i < olList.length ; i++) {
         var option_input = olList[i].getElementsByTagName('li')[0].getElementsByTagName('input')[0];
         option_input.setAttribute('name', 'optionDTOList[' + i + '].title');
+
         var ulTag = olList[i].getElementsByTagName('ul')[0];
         var inputList = ulTag.getElementsByTagName('input');
+
         for (var j = 0; j < inputList.length; j++) {
             if(j%2==0){
                 inputList[j].setAttribute('name', 'optionDTOList[' + i + '].optionSelectDTOList[' + Math.floor(j / 2) + '].title');
@@ -61,38 +63,45 @@ function addOption() {
                              <a onclick="deleteOptionSelect(this)" data-v-de09a10e="" class="idus-icon-close"></a>
                         </li></ul>
                 </ol>`;
-    // reGenerateOptionNumber();
+    reGenerateOptionNumber();
 }
 
 function addOptionSelect(buttonTag, event) {
     event.preventDefault();
     var ulTag = buttonTag.parentNode.parentNode.parentNode.getElementsByTagName('ul')[0];
     ulTag.innerHTML = ulTag.innerHTML + `<li><span><input type="text" name="" placeholder="선택"></span><input type="text" name="optionDTOList[0].optionSelectDTOList[0].price" placeholder="추가금액"><a onclick="deleteOptionSelect(this)" data-v-de09a10e="" class="idus-icon-close"></a></li>`;
-    // reGenerateOptionNumber();
+    reGenerateOptionNumber();
 
 }
 
 function deleteOptionSelect(buttonTag) {
     var option_tag = document.getElementsByClassName('select_group__parent_list');
-    var option_select_tag = buttonTag.parentNode;
+    var option_select_tag = document.getElementsByClassName('select_group__child_list')[0].getElementsByTagName('li');
+    // var option_select_tag = buttonTag.parentNode;
 
     // 옵션이 하나이고 옵션 셀렉트가 하나이면 삭제가 되면 안된다
-    if (option_tag.length == 1 && option_select_tag.nextSibling == null) {
+    if (option_tag.length == 1 && option_select_tag.length == 1) {
         alert("옵션 선택은 최소 1개 입니다.");
     }
-    // 옵션셀렉트 2 이상. 옵션셀렉트 삭제.
-    else if (option_select_tag.nextSibling != null) {
-        option_select_tag.remove();
+    // 옵션이 하나이고 옵션셀렉트가 2 이상. 옵션셀렉트 삭제.
+    else if (option_tag.length == 1 && option_select_tag.length != 1) {
+        console.log("옵션이 하나이고 옵션셀렉트가 2 이상. 옵션셀렉트 삭제." + buttonTag.parentNode);
+        buttonTag.parentNode.remove();
     }
     // 옵션이 2개 이상, 삭제하려는 옵션셀렉트의 옵션에 있는 옵션셀렉트가 1. 옵션+옵션셀렉트 삭제.
-    else if (option_tag.length != 1 && option_select_tag.nextSibling == null) {
+    else if (option_tag.length > 1 && option_select_tag.length == 1 ) {
         buttonTag.parentNode.parentNode.parentNode.remove();
     }
 
-
-
-
-
+    else {
+        if (buttonTag.parentNode.parentNode.childNodes.length == 1){
+            buttonTag.parentNode.parentNode.parentNode.remove();
+        } else {
+            console.log("?" + option_tag.length + ", " + option_select_tag.length);
+            buttonTag.parentNode.remove();
+        }
+    }
+    reGenerateOptionNumber();
 }
 
 function deleteOption(buttonTag) {
@@ -100,7 +109,7 @@ function deleteOption(buttonTag) {
     if (document.getElementsByClassName("select_group__parent_list")[1] != null){
         // buttonTag.parentNode.parentNode.previousSibling.remove();
         buttonTag.parentNode.parentNode.parentNode.remove();
-        // reGenerateOptionNumber();
+        reGenerateOptionNumber();
 
     } else {
         alert("옵션은 최소 1개 입니다.");
@@ -110,7 +119,7 @@ function deleteOption(buttonTag) {
 function deleteOptionforUpdate(buttonTag) {
     buttonTag.parentNode.parentNode.previousSibling.remove();
     buttonTag.parentNode.parentNode.remove();
-    // reGenerateOptionNumber();
+    reGenerateOptionNumber();
 }
 
 function deleteOptionSelectforUpdate(buttonTag) {
