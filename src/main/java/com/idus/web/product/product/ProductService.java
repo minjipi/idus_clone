@@ -193,7 +193,9 @@ public class ProductService {
             ProductImageUploadDTO productImageUploadDTO = ProductImageUploadDTO.builder().imgName(productImageUpload.getImgName()).build();
             productImageUploadDTOSet.add(productImageUploadDTO);
         });
+
         List<ProductImageUploadDTO> productImageUploadDTOList = new ArrayList<>(productImageUploadDTOSet);
+
         ProductDTO productDTO = ProductDTO.builder()
                 .idx(product.getIdx())
                 .productName(product.getProductName())
@@ -206,7 +208,6 @@ public class ProductService {
                 .productImageUploadDTOList(productImageUploadDTOList)
                 .build();
 //      productDTO에 product 엔티티의 idx, 값을 저장한다.
-
 
 //      productDTO를 반환.
         return productDTO;
@@ -257,7 +258,7 @@ public class ProductService {
         result.forEach(arr -> {
             ProductImageUpload productImageUpload = (ProductImageUpload) arr[1];
 
-            if(productImageUpload != null) {
+            if (productImageUpload != null) {
 
                 productDTOList.forEach(productDTO -> {
                     if (productDTO.getIdx() == productImageUpload.getProduct().idx) {
